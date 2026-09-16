@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mes achats · ISHAQ L’ARTISTE</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap');
+    :root { --bg:#070707; --gold:#d7ad63; --red:#ff3a2f; --muted:#a8a49c; --line:rgba(241,237,228,.14); }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:#fff; font-family:Inter,Arial,sans-serif; padding:80px 5vw; }
+    .back { display:inline-block; margin-bottom:40px; text-decoration:none; font-family:'Space Mono'; font-size:11px; color:var(--muted); letter-spacing:.1em; }
+    .back:hover { color:var(--gold); }
+    h1 { font-family:'DM Serif Display'; font-size:clamp(42px,6vw,80px); margin:0 0 14px; }
+    .eyebrow { font-family:'Space Mono'; font-size:10px; letter-spacing:.2em; color:var(--gold); text-transform:uppercase; margin-bottom:14px; }
+    .sub { color:var(--muted); max-width:600px; margin-bottom:50px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px; }
+    .card { border:1px solid var(--line); background:rgba(241,237,228,.03); padding:16px; display:flex; flex-direction:column; gap:12px; }
+    .card img { width:100%; aspect-ratio:2/3; object-fit:cover; }
+    .card h3 { font-family:'DM Serif Display'; font-size:20px; margin:0; line-height:1; }
+    .card .ref { font-family:'Space Mono'; font-size:9px; color:var(--muted); letter-spacing:.1em; }
+    .btn { display:inline-block; text-align:center; padding:11px; background:#1f4f30; border:1px solid #3cc474; color:#d9f4e4; text-decoration:none; font-family:'Space Mono'; font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+    .btn:hover { background:#3cc474; color:#0a1a10; }
+    .empty { border:1px dashed var(--line); padding:60px 30px; text-align:center; color:var(--muted); font-family:'Space Mono'; font-size:11px; }
+    .empty a { color:var(--gold); }
+  </style>
+</head>
+<body>
+  <a class="back" href="../../index.html">← Retour</a>
+  <div class="eyebrow">Bibliothèque personnelle</div>
+  <h1>Mes achats</h1>
+  <p class="sub">Les ouvrages que vous avez acquis sont conservés dans ce navigateur. Vous pouvez les retélécharger à volonté.</p>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const BOOKS = {
+      '24h':    { title:'24 HEURES',               cover:'../../img/24h.jpeg',    file:'../../files/24-heures.html' },
+      'ia':     { title:'QUI UTILISE ENCORE L’IA ?',cover:'../../img/ia.jpeg',    file:'../../files/ia.html' },
+      'cartes': { title:'CARNETS',                 cover:'../../img/cartes.jpeg', file:'../../files/carnets.html' }
+    };
+
+    const owned = JSON.parse(localStorage.getItem('ishaq_achats') || '{}');
+    const grid = document.getElementById('grid');
+
+    if (Object.keys(owned).length === 0) {
+      grid.innerHTML = '<div class="empty">Aucun achat pour le moment.<br><a href="../../index.html">Découvrir les ouvrages →</a></div>';
+    } else {
+      Object.entries(owned).forEach(([id, info]) => {
+        const b = BOOKS[id];
+        if (!b) return;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${b.cover}" alt="${b.title}">
+          <h3>${b.title}</h3>
+          <div class="ref">ACHETÉ LE ${new Date(info.date).toLocaleDateString('fr-FR')}</div>
+          <div class="ref">REF · ${info.ref}</div>
+          <a class="btn" href="${b.file}" download="${b.file.split('/').pop()}">TÉLÉCHARGER LE LIVRE ↓</a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

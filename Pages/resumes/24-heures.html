@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070707">
+  <title>ISHAQ L’ARTISTE — Résumé</title>
+
+  <!-- ✅ BON SCRIPT FEDAPAY -->
+  <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+    :root {
+      --bg: #070707;
+      --paper: #f1ede4;
+      --red: #ff3a2f;
+      --gold: #d7ad63;
+      --muted: #a8a49c;
+      --line: rgba(241, 237, 228, .14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 80% 12%, rgba(60, 70, 130, .18), transparent 30%),
+        radial-gradient(circle at 15% 85%, rgba(255, 58, 47, .07), transparent 28%),
+        var(--bg);
+      color: #fff;
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    .back {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 4vw;
+      font-family: 'Space Mono';
+      font-size: 11px;
+      letter-spacing: .08em;
+      background: linear-gradient(rgba(0, 0, 0, .78), transparent);
+    }
+
+    .back a { text-decoration: none; opacity: .82; }
+    .back a:hover { opacity: 1; color: var(--gold); }
+    .back span { color: var(--muted); }
+
+    .sheet {
+      max-width: 1150px;
+      margin: auto;
+      padding: 120px 5vw 90px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .cover-wrap { position: sticky; top: 90px; }
+
+    .cover {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, .65), 0 0 0 1px rgba(241, 237, 228, .14);
+    }
+
+    .cover-note {
+      margin-top: 14px;
+      font-family: 'Space Mono';
+      font-size: 9px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .eyebrow {
+      font-family: 'Space Mono';
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: .9;
+      letter-spacing: -.04em;
+      margin: 16px 0 12px;
+    }
+
+    .subtitle {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.4vw, 30px);
+      line-height: 1.25;
+      color: #d9d3c7;
+      margin: 0 0 26px;
+    }
+
+    .meta { display: flex; flex-wrap: wrap; gap: 9px; margin: 0 0 36px; }
+
+    .pill {
+      border: 1px solid var(--line);
+      padding: 7px 11px;
+      font-family: 'Space Mono';
+      font-size: 9px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .pill.owned {
+      background: rgba(60, 196, 116, .15);
+      border-color: #3cc474;
+      color: #9be3b5;
+    }
+
+    .summary { margin-top: 14px; }
+
+    .summary p {
+      color: #c9c4ba;
+      font-size: 16px;
+      line-height: 1.85;
+      margin: 0 0 20px;
+      max-width: 640px;
+    }
+
+    .summary p:first-child::first-letter {
+      font-family: 'DM Serif Display', serif;
+      font-size: 58px;
+      line-height: .8;
+      float: left;
+      padding: 6px 10px 0 0;
+      color: var(--red);
+    }
+
+    .quote {
+      margin: 38px 0;
+      padding: 26px 30px;
+      border-left: 3px solid var(--red);
+      background: rgba(241, 237, 228, .04);
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 2.6vw, 32px);
+      line-height: 1.3;
+      color: #e9e4da;
+    }
+
+    .quote span {
+      display: block;
+      margin-top: 14px;
+      font-family: 'Space Mono';
+      font-size: 9px;
+      letter-spacing: .18em;
+      color: var(--muted);
+    }
+
+    .fiche { margin: 44px 0 0; border-top: 1px solid var(--line); }
+
+    .fiche-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 2px;
+      border-bottom: 1px solid var(--line);
+      font-family: 'Space Mono';
+      font-size: 11px;
+      letter-spacing: .06em;
+    }
+
+    .fiche-row b {
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      align-self: center;
+    }
+
+    .pay {
+      margin-top: 56px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(241, 237, 228, .05), transparent);
+      padding: 38px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pay-txt .eyebrow { color: var(--red); }
+
+    .pay-txt h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1;
+      margin: 10px 0 8px;
+    }
+
+    .pay-txt p { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .price {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(30px, 3.4vw, 44px);
+      color: var(--gold);
+    }
+
+    .pay-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+      min-width: 280px;
+    }
+
+    .email-field {
+      font-family: 'Space Mono';
+      font-size: 11px;
+      padding: 11px 14px;
+      background: rgba(0, 0, 0, .35);
+      border: 1px solid var(--line);
+      color: #fff;
+      letter-spacing: .04em;
+      transition: .25s;
+    }
+
+    .email-field:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(0, 0, 0, .55);
+    }
+
+    .email-field::placeholder { color: #6f6b64; }
+
+    .btn-pay, .btn-download {
+      display: inline-flex;
+      justify-content: center;
+      gap: 12px;
+      border: 1px solid transparent;
+      color: #fff;
+      text-decoration: none;
+      padding: 17px 26px;
+      font-family: 'Space Mono';
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      transition: .25s;
+      cursor: pointer;
+    }
+
+    .btn-pay {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .btn-pay:hover {
+      background: #fff;
+      border-color: #fff;
+      color: #000;
+    }
+
+    .btn-download {
+      background: #1f4f30;
+      border-color: #3cc474;
+      color: #d9f4e4;
+    }
+
+    .btn-download:hover {
+      background: #3cc474;
+      color: #0a1a10;
+    }
+
+    .btn-pay:disabled { opacity: .55; cursor: not-allowed; }
+
+    .btn-extrait {
+      display: inline-flex;
+      justify-content: center;
+      border: 1px solid var(--line);
+      padding: 14px 22px;
+      text-decoration: none;
+      font-family: 'Space Mono';
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #e9e4da;
+      transition: .25s;
+    }
+
+    .btn-extrait:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .pay-methods {
+      margin-top: 10px;
+      font-family: 'Space Mono';
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-30px);
+      background: #0d2b18;
+      border: 1px solid #3cc474;
+      color: #d9f4e4;
+      padding: 16px 24px;
+      font-family: 'Space Mono';
+      font-size: 12px;
+      letter-spacing: .05em;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: .35s;
+      max-width: 90vw;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      padding: 40px 5vw;
+      border-top: 1px solid #222;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: #777;
+      font-family: 'Space Mono';
+      font-size: 9px;
+      letter-spacing: .08em;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .cover-wrap { position: static; max-width: 420px; }
+      .pay { flex-direction: column; align-items: stretch; }
+      .pay-actions { min-width: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="back">
+    <a href="../index.html">← RETOUR À L’UNIVERS</a>
+    <span>ISHAQ L’ARTISTE · BIBLIOTHÈQUE</span>
+  </div>
+
+  <div class="toast" id="toast">✓ Paiement reçu — votre exemplaire est prêt à télécharger.</div>
+
+  <main class="sheet">
+    <div class="layout">
+
+      <div class="cover-wrap">
+        <img class="cover" id="cover" src="" alt="">
+        <div class="cover-note">Couverture · archive officielle</div>
+      </div>
+
+      <div>
+        <div class="eyebrow" id="kicker">Bibliothèque</div>
+        <h1 id="title">…</h1>
+        <p class="subtitle" id="subtitle">…</p>
+        <div class="meta" id="meta"></div>
+
+        <div class="eyebrow">Résumé</div>
+        <div class="summary" id="summary"></div>
+
+        <blockquote class="quote" id="quote"></blockquote>
+
+        <div class="fiche" id="fiche"></div>
+
+        <section class="pay">
+          <div class="pay-txt">
+            <div class="eyebrow" id="payEyebrow">Se procurer l’ouvrage</div>
+            <h2 id="payTitle">Exemplaire numérique</h2>
+            <p id="paySubtitle">Paiement sécurisé · téléchargement instantané</p>
+          </div>
+
+          <div class="price" id="price">—</div>
+
+          <div class="pay-actions" id="payActions">
+            <!-- rempli dynamiquement -->
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>© ISHAQ L’ARTISTE</span>
+    <span>ARCHIVE · CRÉATION · TRANSMISSION</span>
+  </footer>
+
+  <script>
+    /* =====================================================
+       CONFIG FEDAPAY
+       - Test : pk_sandbox_...
+       - Live : pk_live_...
+    ===================================================== */
+    const FEDAPAY_KEY = 'pk_sandbox_GfTlzWtjxOZMxnim7lNIlzXd';
+
+    /* =====================================================
+       CONTENU DES LIVRES
+       amount : montant en FCFA DIRECT (XOF n'a pas de sous-unité)
+       file   : chemin vers le fichier HTML du livre (à télécharger)
+    ===================================================== */
+    const BOOKS = {
+      '24h': {
+        num: '01',
+        title: '24 HEURES',
+        subtitle: 'Une nuit entière pour traverser la mémoire, la solitude et l’Afrique.',
+        cover: '../../img/24h.jpeg',
+        pills: ['Février 2001', 'Toulouse', '24 pages', 'Roman · journal intérieur'],
+        summary: [
+          'Vingt-quatre heures en vingt-quatre pages : une nuit blanche où l’écriture devient refuge, mémoire et manière de résister à l’oubli. Le texte passe de l’intime à l’Histoire, de la mort à la vie, du rap à l’Afrique, sans quitter le fil de la conscience.',
+          'De 00h00 à 0h00, chaque heure est une station : le sommeil qui ne vient pas, le père qui dort derrière la cloison, le vieux tirailleur d’en face, le souvenir d’Eric, le pont colonial, le grand marché. Un journal intérieur tendu comme un fil d’Ariane dans la nuit.'
+        ],
+        quote: 'Chaque seconde est un morceau d’éternité.',
+        fiche: [
+          ['Première publication', 'Février 2001'],
+          ['Forme', '24 pages · chapitres-heures'],
+          ['Langue', 'Français'],
+          ['Minisite', 'Lecture intégrale en ligne']
+        ],
+        price: '5 000 FCFA',
+        amount: 5000,
+        minisite: '24h.html',
+        file: '../../files/24-heures.html'
+      },
+
+      'ia': {
+        num: '05',
+        title: 'QUI UTILISE ENCORE L’IA ?',
+        subtitle: 'La Saison de pluie sous Médji · Manuel du Certificateur littéraire, 2031.',
+        cover: '../../img/ia.jpeg',
+        pills: ['2031', 'Anticipation', 'Roman · essai', 'Manuel du certificateur'],
+        summary: [
+          'En 2031, les machines écrivent tout, tout le temps, partout. Reste une fonction que personne n’a su automatiser : certifier qu’un texte est encore né d’une main humaine. Sous la pluie de Médji, un certificateur littéraire tient le registre des dernières œuvres signées — tremblantes, imparfaites, vivantes.',
+          'Entre manuel professionnel, journal et satire, le roman retourne la question : non pas « que peut l’IA ? », mais « que reste-t-il de nous quand elle peut tout ? ». Une fable urgente sur la signature, la preuve et la saison des pluies comme dernière métaphore du vivant.'
+        ],
+        quote: 'Derrière chaque texte certifié, une main qui a douté.',
+        fiche: [
+          ['Univers', 'Médji · 2031'],
+          ['Genre', 'Anticipation · satire'],
+          ['Langue', 'Français'],
+          ['Minisite', 'Lecture d’extraits en ligne']
+        ],
+        price: '6 000 FCFA',
+        amount: 6000,
+        minisite: 'IA.html',
+        file: '../../files/ia.html'
+      },
+
+      'cartes': {
+        num: '06',
+        title: 'CARNETS',
+        subtitle: 'Nouvelles, fiction, poésie, ruminations — l’atelier d’Ishaq L’Artiste.',
+        cover: '../../img/cartes.jpeg',
+        pills: ['Recueil', 'Textes choisis', 'Poésie · nouvelles'],
+        summary: [
+          'Les carnets de travail d’Ishaq L’Artiste réunis en un volume : nouvelles, fictions brèves, poèmes et ruminations couchés au fil des nuits. On y entre comme dans un atelier à ciel ouvert, où la pensée se cherche, se rature et se tient debout.',
+          'Ce recueil est la face cachée de l’œuvre : ce qui précède les livres, ce qui les accompagne, ce qui leur survit. Une porte d’entrée idéale pour qui veut entendre la voix avant les grandes architectures.'
+        ],
+        quote: 'J’écris donc.',
+        fiche: [
+          ['Contenu', 'Nouvelles · poésie · ruminations'],
+          ['Forme', 'Recueil · fragments'],
+          ['Langue', 'Français'],
+          ['Minisite', 'Feuilleter les carnets']
+        ],
+        price: '4 000 FCFA',
+        amount: 4000,
+        minisite: 'cartes.html',
+        file: '../../files/carnets.html'
+      }
+    };
+
+    /* =====================================================
+       UTILITAIRE : nom du fichier téléchargé
+       (repris du chemin → garantit la bonne extension .html)
+    ===================================================== */
+    function bookFileName(book) {
+      return book.file.split('/').pop(); // ex : 24-heures.html
+    }
+
+    /* =====================================================
+       GESTION DES ACHATS (sans backend — localStorage)
+    ===================================================== */
+    const STORE_KEY = 'ishaq_achats';
+
+    function getOwned() {
+      try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+      catch { return {}; }
+    }
+
+    function markOwned(id, ref) {
+      const owned = getOwned();
+      owned[id] = { ref: ref, date: new Date().toISOString() };
+      localStorage.setItem(STORE_KEY, JSON.stringify(owned));
+    }
+
+    function isOwned(id) {
+      return !!getOwned()[id];
+    }
+
+    /* =====================================================
+       RENDU DE LA PAGE
+    ===================================================== */
+    const params = new URLSearchParams(location.search);
+    const key = (params.get('livre') && BOOKS[params.get('livre')]) ? params.get('livre') : '24h';
+    const b = BOOKS[key];
+    const owned = isOwned(key);
+
+    document.title = b.title + ' — Ishaq L’Artiste · Résumé';
+    document.getElementById('cover').src = b.cover;
+    document.getElementById('cover').alt = 'Couverture ' + b.title;
+    document.getElementById('kicker').textContent = 'Bibliothèque · ' + b.num;
+    document.getElementById('title').textContent = b.title;
+    document.getElementById('subtitle').textContent = b.subtitle;
+
+    const pills = b.pills.slice();
+    if (owned) pills.push('✓ DÉJÀ ACHETÉ');
+    document.getElementById('meta').innerHTML = pills.map(p =>
+      '<span class="pill' + (p.includes('ACHETÉ') ? ' owned' : '') + '">' + p + '</span>'
+    ).join('');
+
+    document.getElementById('summary').innerHTML = b.summary.map(p => '<p>' + p + '</p>').join('');
+    document.getElementById('quote').innerHTML = b.quote + '<span>— ISHAQ L’ARTISTE</span>';
+    document.getElementById('fiche').innerHTML = b.fiche.map(r =>
+      '<div class="fiche-row"><b>' + r[0] + '</b><span>' + r[1] + '</span></div>'
+    ).join('');
+    document.getElementById('price').textContent = b.price;
+
+    /* =====================================================
+       BLOC D'ACTIONS (PAY ou DOWNLOAD)
+    ===================================================== */
+    const payActions = document.getElementById('payActions');
+    const payEyebrow = document.getElementById('payEyebrow');
+    const payTitle = document.getElementById('payTitle');
+    const paySubtitle = document.getElementById('paySubtitle');
+
+    function renderActions() {
+      const ownedNow = isOwned(key);
+      payActions.innerHTML = '';
+
+      if (ownedNow) {
+        // ✅ DÉJÀ ACHETÉ → bouton de téléchargement HTML
+        payEyebrow.textContent = 'EXEMPLAIRE DISPONIBLE';
+        payEyebrow.style.color = '#3cc474';
+        payTitle.textContent = 'Votre exemplaire vous attend';
+        paySubtitle.textContent = 'Fichier HTML autonome — s’ouvre dans n’importe quel navigateur.';
+
+        const btn = document.createElement('a');
+        btn.className = 'btn-download';
+        btn.href = b.file;
+        btn.download = bookFileName(b);          // ✅ ex : 24-heures.html
+        btn.textContent = 'TÉLÉCHARGER LE LIVRE ↓';  // ✅ libellé corrigé
+        payActions.appendChild(btn);
+      } else {
+        // 🛒 PAS ENCORE ACHETÉ → formulaire email + bouton FedaPay (avec data-*)
+        payActions.innerHTML = `
+          <input type="email" id="emailField" class="email-field" placeholder="Votre e-mail (pour recevoir le livre)" required>
+          <button
+            class="btn-pay pay-btn"
+            id="payBtn"
+            type="button"
+            data-transaction-amount="${b.amount}"
+            data-transaction-description="Achat : ${b.title} — Ishaq L’Artiste"
+            data-customer-email="">PAYER MAINTENANT →</button>
+          <div class="pay-methods">Mobile Money · Wave · Carte bancaire · FedaPay</div>
+          <a class="btn-extrait" href="${b.minisite}">LIRE UN EXTRAIT · MINISITE ↗</a>
+        `;
+        bindPay();
+      }
+
+      const libLink = document.createElement('a');
+      libLink.className = 'btn-extrait';
+      libLink.href = 'mes-achats.html';
+      libLink.textContent = 'VOIR MA BIBLIOTHÈQUE →';
+      libLink.style.marginTop = '6px';
+      payActions.appendChild(libLink);
+    }
+
+    function bindPay() {
+      const payBtn = document.getElementById('payBtn');
+      const emailField = document.getElementById('emailField');
+      const toast = document.getElementById('toast');
+
+      // ✅ VÉRIFIE que FedaPay est bien chargé
+      if (typeof FedaPay === 'undefined') {
+        payBtn.addEventListener('click', function () {
+          alert('⚠️ FedaPay n’a pas pu être chargé.\n\nOuvrez cette page via un serveur web (Live Server) avec une connexion internet.');
+        });
+        return;
+      }
+
+      // Met à jour l'email sur le bouton à chaque frappe
+      emailField.addEventListener('input', function () {
+        payBtn.setAttribute('data-customer-email', emailField.value.trim());
+      });
+
+      FedaPay.init('#payBtn', {
+        public_key: FEDAPAY_KEY,
+
+        beforeOpen: function () {
+          const email = emailField.value.trim();
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            emailField.focus();
+            emailField.style.borderColor = 'var(--red)';
+            return false;
+          }
+          payBtn.setAttribute('data-customer-email', email);
+          return true;
+        },
+
+        onClose: function () {
+          // popup fermée sans payer : rien à faire
+        },
+
+        onComplete: function (response) {
+          console.log('[FedaPay] onComplete →', response);
+
+          const tx = (response && response.transaction) ? response.transaction : response;
+          const status = String((tx && tx.status) || (response && response.status) || '').toLowerCase();
+          const ref = (tx && (tx.reference || tx.ref)) ||
+                      (response && response.reference) ||
+                      'ref-' + Date.now();
+
+          if (status === 'approved' || status === 'completed' || status === 'succeeded') {
+            // ✅ PAIEMENT CONFIRMÉ
+            markOwned(key, ref);
+
+            toast.classList.add('show');
+            setTimeout(() => {
+              toast.classList.remove('show');
+              renderActions(); // passe au bouton vert "TÉLÉCHARGER LE LIVRE"
+
+              // ✅ Téléchargement du fichier HTML (et non PDF)
+              const a = document.createElement('a');
+              a.href = b.file;
+              a.download = bookFileName(b);   // ex : 24-heures.html
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            }, 1500);
+
+          } else if (status === 'canceled' || status === 'cancelled' || status === 'pending') {
+            console.log('[FedaPay] statut :', status, '— aucun débit confirmé.');
+
+          } else {
+            alert('Paiement non validé (statut : ' + (status || 'inconnu') + ').\nAucun débit n’a été effectué.');
+          }
+        }
+      });
+    }
+
+    renderActions();
+  </script>
+
+</body>
+</html>
