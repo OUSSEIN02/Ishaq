@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>24 HEURES — Ishaq L’Artiste</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&family=Oswald:wght@300;400;500;600&display=swap');
+
+    /* ========== BASE ========== */
+    :root {
+      --ink: #07141c;
+      --paper: #eee9dc;
+      --paper2: #d6d0c1;
+      --silver: #b9c2c0;
+      --rust: #9b4d3f;
+      --line: rgba(238, 233, 220, .18);
+      --max: 1220px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'DM Mono', monospace;
+      line-height: 1.7;
+    }
+
+    button { font: inherit; }
+
+    /* ========== COUVERTURE ========== */
+    .cover {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(330px, 43%) 1fr;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(155, 77, 63, .2), transparent 26%),
+        linear-gradient(135deg, #061017, #0c222c 60%, #061017);
+    }
+
+    .cover-left {
+      min-height: 100vh;
+      padding: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid var(--line);
+    }
+
+    .cover-img {
+      width: min(100%, 510px);
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      box-shadow: 0 30px 90px #0009, 0 0 0 1px #eee9dc22;
+    }
+
+    .hero {
+      padding: 8vh 7vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kicker,
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    .hero h1 {
+      font: 500 clamp(82px, 11vw, 175px)/.82 'Oswald', sans-serif;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+      margin: 24px 0;
+    }
+
+    .hero h1 .red {
+      display: block;
+      color: var(--rust);
+    }
+
+    .hero h1 .thin {
+      font-weight: 300;
+      color: var(--paper2);
+    }
+
+    .subtitle {
+      font: italic clamp(24px, 3vw, 40px)/1.15 'DM Serif Display', serif;
+      color: #d8d0c0;
+      max-width: 600px;
+    }
+
+    .meta {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      padding: 7px 11px;
+      font-size: 9px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    .enter {
+      width: max-content;
+      background: transparent;
+      color: var(--paper);
+      border: 1px solid var(--paper);
+      padding: 13px 17px;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .enter:hover {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .ded {
+      margin-top: 45px;
+      font-size: 10px;
+      color: #8e9a9e;
+      line-height: 1.9;
+      max-width: 430px;
+    }
+
+    /* ========== NAVIGATION ========== */
+    nav {
+      height: 62px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #061017ed;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+    }
+
+    .brand {
+      font: 500 22px 'Oswald';
+      letter-spacing: .04em;
+    }
+
+    .brand span { color: var(--rust); }
+
+    .navlinks {
+      display: flex;
+      gap: 22px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #9ca8ab;
+    }
+
+    .navlinks a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ========== CORPS ========== */
+    main {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .intro {
+      max-width: var(--max);
+      margin: auto;
+      padding: 105px 6vw 80px;
+    }
+
+    .intro h2 {
+      font: 400 clamp(42px, 6vw, 76px)/1.04 'DM Serif Display', serif;
+      max-width: 930px;
+      margin: 18px 0 25px;
+    }
+
+    .intro p {
+      font: 400 21px/1.65 'DM Serif Display', serif;
+      color: #34434a;
+      max-width: 860px;
+    }
+
+    .quote {
+      border-left: 4px solid var(--rust);
+      padding: 8px 0 8px 24px;
+      margin-top: 50px;
+      font: italic 29px 'DM Serif Display';
+      max-width: 700px;
+      color: var(--rust);
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline {
+      background: var(--ink);
+      padding: 90px 6vw;
+    }
+
+    .timeline-head {
+      max-width: var(--max);
+      margin: 0 auto 40px;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+    }
+
+    .timeline-head h2 {
+      font: 400 clamp(46px, 6vw, 82px)/.9 'Oswald';
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .timeline-head p {
+      max-width: 420px;
+      color: #96a3a7;
+      font-size: 10px;
+    }
+
+    .grid {
+      max-width: var(--max);
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #eee9dc22;
+    }
+
+    .time-card {
+      min-height: 175px;
+      border: 0;
+      background: #0d222c;
+      color: var(--paper);
+      padding: 24px;
+      text-align: left;
+      cursor: pointer;
+      transition: .22s;
+      position: relative;
+    }
+
+    .time-card:hover { background: #17313d; }
+
+    .time-card:after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      bottom: 19px;
+      width: 38px;
+      height: 1px;
+      background: var(--rust);
+      transition: .22s;
+    }
+
+    .time-card:hover:after { width: 85px; }
+
+    .time {
+      display: block;
+      font: 400 31px 'Oswald';
+      color: var(--paper2);
+      margin-bottom: 16px;
+    }
+
+    .time-excerpt {
+      display: block;
+      font-size: 9px;
+      line-height: 1.75;
+      color: #91a0a4;
+    }
+
+    /* ========== LECTURE ========== */
+    .reader {
+      max-width: var(--max);
+      margin: auto;
+      padding: 95px 6vw 120px;
+    }
+
+    .reader-head {
+      border-bottom: 1px solid #c9c2b4;
+      padding-bottom: 24px;
+      margin-bottom: 45px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+    }
+
+    .reader-head h2 {
+      font: 400 60px/.9 'Oswald';
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .reader-head span {
+      font-size: 9px;
+      color: #68757a;
+      text-align: right;
+    }
+
+    .reader-section {
+      display: none;
+      max-width: 890px;
+      margin: auto;
+    }
+
+    .reader-section.active { display: block; }
+
+    .section-marker {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      color: var(--rust);
+      font: 400 44px 'Oswald';
+      margin-bottom: 32px;
+    }
+
+    .section-marker i {
+      height: 1px;
+      background: #c9c2b4;
+      flex: 1;
+    }
+
+    .section-copy p {
+      font: 400 21px/1.75 'DM Serif Display', serif;
+      color: #1b292f;
+      margin: 0 0 24px;
+    }
+
+    .section-copy blockquote {
+      margin: 38px 0;
+      padding: 22px 28px;
+      border-top: 1px solid #c9c2b4;
+      border-bottom: 1px solid #c9c2b4;
+      color: var(--rust);
+      font: italic 29px/1.4 'DM Serif Display';
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 55px;
+      padding-top: 20px;
+      border-top: 1px solid #c9c2b4;
+      gap: 10px;
+    }
+
+    .ctrl {
+      border: 1px solid #aaa296;
+      background: transparent;
+      color: var(--ink);
+      padding: 11px 14px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      cursor: pointer;
+    }
+
+    .ctrl:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .ctrl:disabled { opacity: .3; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #061017;
+      color: #78868b;
+      padding: 48px 6vw;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 9px;
+    }
+
+    footer strong { color: var(--paper2); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 850px) {
+      .cover { grid-template-columns: 1fr; }
+      .cover-left {
+        min-height: auto;
+        padding: 25px;
+        border-right: 0;
+      }
+      .cover-img { width: min(80vw, 430px); }
+      .hero { padding: 40px 25px 60px; }
+      .grid { grid-template-columns: 1fr; }
+      .timeline-head,
+      .reader-head { display: block; }
+      .timeline-head p,
+      .reader-head span {
+        display: block;
+        text-align: left;
+        margin-top: 18px;
+      }
+      .navlinks a:nth-child(2) { display: none; }
+    }
+
+    @media (max-width: 520px) {
+      .intro,
+      .timeline,
+      .reader {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+      .hero h1 { font-size: 23vw; }
+      .section-copy p { font-size: 19px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========== COUVERTURE ========== -->
+  <section class="cover" id="accueil">
+    <div class="cover-left">
+      <!-- IMAGE : remplacez src par votre couverture importée -->
+      <img class="cover-img" src="../img/24h.jpeg" alt="Couverture de 24 heures — Ishaq L’Artiste">
+    </div>
+    <div class="hero">
+      <div class="kicker">Archive littéraire · Février 2001</div>
+      <h1>
+        <span class="thin">24</span>
+        <span class="red">HEURES</span>
+      </h1>
+      <div class="subtitle">Une nuit entière pour traverser la mémoire, la solitude et l’Afrique.</div>
+      <div class="meta">
+        <span class="pill">Ishaq L’Artiste</span>
+        <span class="pill">Toulouse · Février 2001</span>
+        <span class="pill">24 pages</span>
+      </div>
+      <button class="enter" onclick="document.getElementById('texte').scrollIntoView({behavior:'smooth'})">Entrer dans le texte ↓</button>
+      <div class="ded">
+        <b>Dédicace</b><br>
+        À Éric Biaou · À Denise Peyrat · À Gilles Obringer · À Xavier &amp; Anne Marie Basséras
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav>
+    <a class="brand" href="#accueil">24 <span>HEURES</span></a>
+    <div class="navlinks">
+      <a href="#texte">Le texte</a>
+      <a href="#parcours">Les heures</a>
+      <a href="#auteur">Ouverture</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ========== OUVERTURE ========== -->
+    <section class="intro" id="auteur">
+      <div class="eyebrow">00h00 · Ouverture</div>
+      <h2>« Chaque seconde est un morceau d’éternité. »</h2>
+      <p>Vingt-quatre heures en vingt-quatre pages : une nuit blanche où l’écriture devient refuge, mémoire et manière de résister à l’oubli. Le texte passe de l’intime à l’Histoire, de la mort à la vie, du rap à l’Afrique, sans quitter le fil de la conscience.</p>
+      <div class="quote">« J’écris donc. »</div>
+    </section>
+
+    <!-- ========== LES HEURES ========== -->
+    <section class="timeline" id="parcours">
+      <div class="timeline-head">
+        <h2>Les heures</h2>
+        <p>Chaque repère horaire ouvre un fragment de cette traversée. Choisissez une heure pour entrer directement dans le texte.</p>
+      </div>
+
+      <div class="grid">
+        <button class="time-card" onclick="showSection(0)">
+          <span class="time">00h00</span>
+          <span class="time-excerpt">Comment résumer vingt-quatre heures en 24 pages ? Étant entendu que chaque seconde est un morceau d’éternité et ne demande qu’à suspendre son envol. Peut-ê…</span>
+        </button>
+        <button class="time-card" onclick="showSection(1)">
+          <span class="time">00h20</span>
+          <span class="time-excerpt">Ce soir encore le sommeil ne veut pas de moi. Moi, l’ange des ombres que la peur fait vaciller, même la nuit ne veut pas de moi. Même les yeux clos j’ai l’…</span>
+        </button>
+        <button class="time-card" onclick="showSection(2)">
+          <span class="time">1h02</span>
+          <span class="time-excerpt">L’aube est encore lointaine. Suffisamment pour que la nuit m’étreigne l’esprit. Mon cendrier est plein de mégots calcinés autant par la flamme d’une allume…</span>
+        </button>
+        <button class="time-card" onclick="showSection(3)">
+          <span class="time">1h59</span>
+          <span class="time-excerpt">Mon imagination n’est qu’un nœud coulant qui attend que le désespoir me leste. En attendant j’entame un exercice complexe, le schéma global d’une pensée po…</span>
+        </button>
+        <button class="time-card" onclick="showSection(4)">
+          <span class="time">2h40</span>
+          <span class="time-excerpt">Une brise câline et tiède me tire de mes songes. Dehors la nuit se fait plus dense. Vaporeuse. De lointains vrombissements viennent déchirer de temps à aut…</span>
+        </button>
+        <button class="time-card" onclick="showSection(5)">
+          <span class="time">2h55</span>
+          <span class="time-excerpt">J’entends rentrer le vieux d’en face. Un vétéran de la guerre de 39-45. Un de ces tirailleurs qui ont donné toute leur vie à la patrie, à la France. Pour p…</span>
+        </button>
+        <button class="time-card" onclick="showSection(6)">
+          <span class="time">3h17</span>
+          <span class="time-excerpt">À côté, mon père dort depuis longtemps. Mon père pour moi reste un mystère. Un étrange personnage qui a trop cru en l’Homme. Oubliant que concernant l’Homm…</span>
+        </button>
+        <button class="time-card" onclick="showSection(7)">
+          <span class="time">4h05</span>
+          <span class="time-excerpt">Eric et moi avions en commun la famille quasi absente, les mauvais résultats scolaires, le mal-être et le « rap ». Suffisamment pour être plus copains que…</span>
+        </button>
+        <button class="time-card" onclick="showSection(8)">
+          <span class="time">4h15</span>
+          <span class="time-excerpt">À 17 ans, je n’étais même pas sûr de tenir assez longtemps pour passer le Bac. C’était effrayant de voir ces jeunes de mon âge incapables d’ébaucher une ré…</span>
+        </button>
+        <button class="time-card" onclick="showSection(9)">
+          <span class="time">4h35</span>
+          <span class="time-excerpt">Encore une cigarette que mes lèvres retiennent nonchalamment. J’arrêterai de fumer demain. Mon père n’a jamais pensé à mettre une télé chez nous. Je n’ai j…</span>
+        </button>
+        <button class="time-card" onclick="showSection(10)">
+          <span class="time">4h50</span>
+          <span class="time-excerpt">Avec insistance le sommeil me fait des avances. L’air frais de l’aube renforce son charme. Le vacarme de mon esprit m’a encore coûté une nuit. J’appréhende…</span>
+        </button>
+        <button class="time-card" onclick="showSection(11)">
+          <span class="time">10h01</span>
+          <span class="time-excerpt">Le jour est là. Bruyant et brûlant. Je l’entends avec son halètement de fauve. Maître des espaces et seigneur des horizons, il viole mes paupières et s’épa…</span>
+        </button>
+        <button class="time-card" onclick="showSection(12)">
+          <span class="time">10h22</span>
+          <span class="time-excerpt">Je scrute mon reflet dans la glace. Ce regard figé dans le vague qui s’efforce de ne rien vouloir dire. Il y a des barreaux même sur les fenêtres de mon âm…</span>
+        </button>
+        <button class="time-card" onclick="showSection(13)">
+          <span class="time">10h43</span>
+          <span class="time-excerpt">Le ciel a des allures de toile de maître. Un dôme pour cette chapelle du peuple noir. Un bleu métallique étalé à perte de vue, des touffes de gris jetées e…</span>
+        </button>
+        <button class="time-card" onclick="showSection(14)">
+          <span class="time">11h11</span>
+          <span class="time-excerpt">Je m’engage sur un pont, L’ancien pont comme on dit ici. Authentique ouvrage de la colonisation. Il fallait acheminer huile de palme et coton jusqu’au port…</span>
+        </button>
+        <button class="time-card" onclick="showSection(15)">
+          <span class="time">12h07</span>
+          <span class="time-excerpt">J’ai appris à mes dépens le monde qu’il y a entre la France et les Français. Parce qu’un jour j’ai mis les pieds en France. J’ai foulé le sol de Victor Hug…</span>
+        </button>
+        <button class="time-card" onclick="showSection(16)">
+          <span class="time">13h37</span>
+          <span class="time-excerpt">J’ai du mal à ne voir dans cette foule qui circule autour de moi que des nègres à l’esprit lourd et sans ambition. Non. Ce serait trop simple. Vraiment tr…</span>
+        </button>
+        <button class="time-card" onclick="showSection(17)">
+          <span class="time">14h01</span>
+          <span class="time-excerpt">Je vais flâner du côté du grand marché. On y trouve de tout. Du riz importé comme des cercueils. Des pneus comme des cassettes piratées. De tout. Et à cett…</span>
+        </button>
+        <button class="time-card" onclick="showSection(18)">
+          <span class="time">14h27</span>
+          <span class="time-excerpt">Le monde court vers des dollars et ce, depuis longtemps. Les uns tuent pour la patrie en y trouvant de quoi se réaliser et les autres se bouchent le nez et…</span>
+        </button>
+        <button class="time-card" onclick="showSection(19)">
+          <span class="time">14h40</span>
+          <span class="time-excerpt">L’avenir de mon pays et de toute l’Afrique ce sont ces jeunes comme moi qui ont vu faire leurs parents dans l’incertitude et dans le manque de cohérence in…</span>
+        </button>
+        <button class="time-card" onclick="showSection(20)">
+          <span class="time">14h59</span>
+          <span class="time-excerpt">Pour ceux qui se demandent jusqu’à quand le passé sera une excuse pour les africains, la réponse est simple : tant que ce sera vrai. Tant que ceux qui ont…</span>
+        </button>
+        <button class="time-card" onclick="showSection(21)">
+          <span class="time">15h09</span>
+          <span class="time-excerpt">Je me dis qu’un jour il faudra que je sorte un disque. Un disque-passerelle entre l’Afrique et le monde, entre le Rap et la vraie vie. Un disque où l’Homme…</span>
+        </button>
+        <button class="time-card" onclick="showSection(22)">
+          <span class="time">15h48</span>
+          <span class="time-excerpt">Je vais faire un tour chez Rock. Un de ceux, avec Oscar par qui la musique existe dans cette ville et dans ce pays. Je ne sais pas s’il s’en est rendu comp…</span>
+        </button>
+        <button class="time-card" onclick="showSection(23)">
+          <span class="time">16h29</span>
+          <span class="time-excerpt">J’ai longtemps cru que le plus grand problème de l’Homme était la mort. Mais non. L’ultime problème de l’Homme c’est encore la vie. Le simple fait de vivre…</span>
+        </button>
+        <button class="time-card" onclick="showSection(24)">
+          <span class="time">17h33</span>
+          <span class="time-excerpt">Le soleil décline et je réalise le temps qui fuit. Le temps. J’ai toujours eu du mal avec le temps. J’ai perdu la faculté de percevoir avec certitude le te…</span>
+        </button>
+        <button class="time-card" onclick="showSection(25)">
+          <span class="time">18h18</span>
+          <span class="time-excerpt">Je me prends à imaginer que le pétrole jaillisse à flots dans ce pays. Des esprits myopes verront s’envoler nos ennuis avec les kilomètres de pipelines, le…</span>
+        </button>
+        <button class="time-card" onclick="showSection(26)">
+          <span class="time">20h00</span>
+          <span class="time-excerpt">L’heure où tout le monde s’installe pour le shoot d’infos quotidien. Pour certains c’est un Juda pour épier le monde. Pour d’autres une fenêtre sur un aill…</span>
+        </button>
+        <button class="time-card" onclick="showSection(27)">
+          <span class="time">21h22</span>
+          <span class="time-excerpt">La nuit est de nouveau là et il me faut l’affronter. Guy vient d’arriver. On va pouvoir discuter pour amorcer la descente vers les profondeurs de la nuit. …</span>
+        </button>
+        <button class="time-card" onclick="showSection(28)">
+          <span class="time">22h55</span>
+          <span class="time-excerpt">Il paraît qu’une certitude c’est une constatation qu’on médite et qu’on s’approprie. À ce titre je suis certain qu’un autre monde est possible. Un monde un…</span>
+        </button>
+        <button class="time-card" onclick="showSection(29)">
+          <span class="time">0h00</span>
+          <span class="time-excerpt">Vingt-quatre heures plus tard je suis toujours jeune, toujours Noir et toujours Africain. Le même étau létal me tient. Encore une nuit à tirer avant que la…</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== LECTURE ========== -->
+    <section class="reader" id="texte">
+      <div class="reader-head">
+        <h2>Lecture</h2>
+        <span>Navigation : ← →<br>Une heure à la fois.</span>
+      </div>
+
+      <article class="reader-section" id="s0">
+        <div class="section-marker"><span>00h00</span><i></i></div>
+        <div class="section-copy">
+          <p>Comment résumer vingt-quatre heures en 24 pages ? Étant entendu que chaque seconde est un morceau d’éternité et ne demande qu’à suspendre son envol. Peut-être faut-il aller chercher l’impérieux besoin de laisser les mots s’agglutiner dans une architecture délicate. Dénicher l’idée qui se cache derrière chaque mot et les agencer comme un puzzle pour se rapprocher au mieux de ce qu’on pense. Difficile d’expliquer la nécessité d’écrire ou de dire tout simplement. Rien que les mots et des mots pour soigner des maux. Des maux de l’âme qu’un jour l’existence traumatisa. Moi j’écris avant tout parce que j’ai été secouru certains jours de ma vie par des mots, par des livres. Je sais donc que ce n’est jamais perdu de dire, d’écrire. Il y aura toujours quelqu’un quelque part pour y trouver une aspérité pour s’accrocher et s’élever. J’écris donc.</p>
+          <blockquote>“Ce soir encore le sommeil ne veut pas de moi”</blockquote>
+          <p>Elle est drôle cette valse de la vie où on danse seul. Seul avec soi même et avec les autres. Seul dans la foule. Seul dans les profondeurs de sa pensée. Seul dans les recoins de son esprit. L’écueil à éviter est de se surestimer devant le cynisme du temps car ici comme ailleurs les ombres sont les mêmes. À chaque aube qui pointe elles reprennent le même ballet qui se répète depuis la nuit des temps. Chaque jour que Dieu fait, le même constat de notre existence éphémère et la nécessité de lui donner une consistance. Mais que mettre dans cet étrange bagage ? De là à se demander de quoi est-on vraiment certain, il n’y a que l’espace d’une nuit blanche. Nuit où un magnéto bizarroïde rejoue des séquences de vie censurées. Des trous noirs aux profondeurs abyssales qui vous donnent le vertige. Vertige du sens et de l’essence même de la vie. Nostalgie vertigineuse de cette naïve innocence dont on se défait à chaque nouvelle certitude de l’esprit. L’intellect comme bouclier pour une conscience en émoi. Lorsqu’il s’agit de réfléchir et de penser à la finalité de nos existences, il se crée comme une distance avec nous-mêmes. Nous sommes l’objet de nos analyses et le sujet de nos questions sans réponses. Masturbation intellectuelle, gymnastique pour les neurones, ce n’est que ça lorsqu’il s’agit de toucher l’insondable abîme qu’est la mort. Un bouquet de chrysanthèmes et quelques larmes pour les morts. Des montagnes de réflexions et un océan de remords. Voilà tout ce qu’il reste pour un esprit qui a vacillé comme une flammèche devant le souffle de la vie. Difficile et confus reste mon rapport à la vie ou du moins à la mort. Tout comme mon rapport au temps.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s1">
+        <div class="section-marker"><span>00h20</span><i></i></div>
+        <div class="section-copy">
+          <p>Ce soir encore le sommeil ne veut pas de moi. Moi, l’ange des ombres que la peur fait vaciller, même la nuit ne veut pas de moi. Même les yeux clos j’ai l’esprit tumultueux. Un vacarme exténuant. Dehors le silence se laisse deviner soyeux et chaud. Un peu d’imagination suffit pour l’écouter. Un silence comme il en existe d’autres. Mais celui-ci c’est le mien. Le silence de mon esprit que la peur rend perceptible. J’ai peur quand vient la nuit. Encore une nuit dans l’oppressant ballet du temps. Une nuit pour faire écho par avance à l’éternité. Les horizons s’éclipsent et l’espace semble s’être contracté en moi. Il n’y a dehors que des néons à l’agonie et le temps se rétracte et conspire avec la nuit contre moi. Pour seules armes, j’ai ma peur et mon imagination. Glaives et boucliers aussi impalpables que la nuit sur cette terre d’Afrique où le temps dans sa majesté cynique m’a rendu possible depuis plus de deux cent soixante-quatorze mois jusqu’à cette nuit-ci. Encore une nuit comme les autres. Une nuit lépreuse qu’embrase par endroit des néons blafards. Des morceaux d’un rêve illusoire qu’étreint le chaos alentour dissimulé par un océan de ténèbres. Mais demain aux premières lueurs d’un soleil encore engourdi, la vie grouillera malgré elle dans les artères de cette ville où l’âme noire subit l’insolence de l’Histoire. On verra se démener un peuple, mon peuple, le peuple noir d’Afrique, entre les lumières de l’occident et l’immuable plénitude de ce qu’il a toujours été. On verra s’écrire encore une page, encore une leçon de courage dans l’ignominie générale.</p>
+          <blockquote>“Je suis jeune, Noir et Africain”</blockquote>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s2">
+        <div class="section-marker"><span>1h02</span><i></i></div>
+        <div class="section-copy">
+          <p>L’aube est encore lointaine. Suffisamment pour que la nuit m’étreigne l’esprit. Mon cendrier est plein de mégots calcinés autant par la flamme d’une allumette que par l’angoisse. L’angoisse de l’aube, de l’avenir, du retour de cet interminable ballet du jour et de la nuit. Demain un astre de feu qui sous ces latitudes est plutôt généreux inondera les flancs offerts de cette terre d’Afrique de son brasier ardent. Il fera chaud dehors comme dedans, dedans comme à l’intérieur, à l’intérieur comme dans mon esprit. Le feu qui brûle dans mon esprit à quelque chose d’un magma que recrache comme du vomi un volcan. Un trop-plein meurtrier qu’il faut évacuer, laisser couler. Demain je ne sais pas où je serai mais je sais que plus jamais ne me lâchera cette impression de m’être trompé de chemin. Cette obsédante impression que le destin dans son impériale froideur ne m’a rendu possible que pour me faire payer. Quoi, je n’en sais rien mais je paye. Chaque seconde de ma vie qui s’égrène sur le chapelet de l’existence est une douleur que j’assume avec la fierté et le mutisme de ceux qui savent qu’ils ne sauront jamais rien. Une poussière mégalomane, une fantaisie de la nature, trop emplie d’elle-même pour laisser filtrer de l’humilité. Voilà l’Homme. L’Homme dans sa version misérable. Je m’enferme dans cette pièce obscure, dans cette nuit noire, dans ce pays d’Afrique, pour essayer de laisser entrer un peu de lumière dans mon esprit. La nuit me froisse comme une feuille que l’esprit stérile rend coupable.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s3">
+        <div class="section-marker"><span>1h59</span><i></i></div>
+        <div class="section-copy">
+          <p>Mon imagination n’est qu’un nœud coulant qui attend que le désespoir me leste. En attendant j’entame un exercice complexe, le schéma global d’une pensée portée sur des horizons sinueux où le moindre soubresaut de ma réflexion se répercute à l’infini. Mon combat d’Homme vole plus haut que mes revendications de jeune Africain. Mais puisque les mots sont traîtres et pourtant seuls vecteurs de ma pensée, je les exploite comme un seigneur. Bénite par des mânes errants, mon âme vibre du souffle des archanges pendant que des vents austères emportent ma conscience dériver sur les vagues du Néant et que le cyclone de l’occident tout en attributs clinquants me tient captif de ses serres. Il y a peut-être une raison de rester optimiste, mais les aubes se succèdent avec la même froideur. Chaque jour que Dieu fait, il faut être. Aucune nécessité de surévaluer le capital d’espoir qu’on possède. Il faut et il suffit qu’au rythme où pulse le cœur, on trouve la force de continuer son chemin. Je suis jeune, Noir et Africain. Une situation d’une complexité éloquente quand on veut voir plus loin que l’apparence. Trois degrés d’implication dans la destinée de l’humanité. En tant que jeune, j’ai une tâche face à l’humanité. En tant que Noir j’ai une tâche face à l’Histoire. En tant qu’Africain j’ai une tâche face au monde. Je suis né sur cette terre du monde charcutée par la colonisation et flouée par l’Histoire. J’appartiens à ce peuple mis entre parenthèses dans le brouhaha du monde. Un peuple traumatisé. Je suis un Nègre. Je viens de ces pays où le soleil brûle la peau et où le poids du passé entame le velours des regards et la soie des consciences. Chez moi le poids de l’Histoire courbe l’échine des nouveau-nés et réduit au mutisme ceux qui ont vu, ceux qui savent. Conséquence : j’ai du mal à savoir qui je suis, d’où je viens et où je vais. Pourtant quand on ne sait pas où on va, il ne faut pas oublier d’où on vient. Mais moi mon passé est un gouffre et mon futur un horizon ténébreux. Un peu comme si ce fil d’Ariane tangible dans l’inconscient, tendu depuis les méandres tumultueux de mon passé par mes ancêtres, avait été rompu par la pression. Pression du temps et des mouvements de l’Histoire qui d’incidents en accidents ont érodé fibre après fibre le fil conducteur de la conscience de mon peuple. Et aujourd’hui, perdus dans les ombres hostiles de l’amnésie, les miens et moi allons payer l’addition. Mes jours s’égrènent sur le chapelet de l’existence et tout ce que je suis me crispe face à l’avenir des miens en ce monde. Mais penser est le premier droit de l’homme et j’en use comme d’une drogue pour semer l’espoir et la plénitude dans les sillons arides de mon être. Je pense aux miens et étale ce gribouillis abscons pour que ne s’évapore pas ma pensée avec l’aube. Pour que demain les archanges mélancoliques de mon espèce sachent qu’hier quelqu’un a pensé. Car demain, quand viendra le temps des larmes dans un monde à l’agonie, j’ai peur que ceux de toutes obédiences qui ont le bénéfice de l’Histoire n’aient pavé de silences le chemin de la mémoire, ne laissant aux miens que leur douleur pour exister. Je vis dans une Afrique généreuse qui, pour rassurer ses fils, les caresse d’une main épineuse et les blesse malgré un trop plein d’amour.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s4">
+        <div class="section-marker"><span>2h40</span><i></i></div>
+        <div class="section-copy">
+          <p>Une brise câline et tiède me tire de mes songes. Dehors la nuit se fait plus dense. Vaporeuse. De lointains vrombissements viennent déchirer de temps à autre cette toile d’ombres et de silences. De ma fenêtre, j’ai une drôle de vue sur cette ville. Une vue quadrillée par les barreaux de ma fenêtre. Ce qui me donne l’impression parfois d’être en prison même si dans l’absolu je me sens libre dans mon intériorité. L’un des deux côtés de ces barreaux est une prison. Va savoir lequel. Une prison qui vous édente l’esprit à force de mordiller les lourds barreaux de l’incompréhension. Une prison dont les geôliers s’appellent Colonisation, Dictature, Pauvreté, Silence. Sur les murs de ma toute petite chambre, j’ai collé des poèmes et des textes, fruits de mes nuits d’insomnie. Je me crée mon monde puisque celui qu’on m’offre m’est hostile. « Ils sévissent le cœur tranquille et l’âme ravie, logés dans cet écrin où des gènes et l’Histoire ont souri. Un peu comme si, dans le gribouillis insensé de la destinée, ils étaient la parcelle d’éclat qui rappelle et entretient les ombres alentour. Ombres et lumières, artisans de leur vis-à-vis, qui s’encastrent dans la mosaïque de l’existence. Eux aussi, comme nous, ils errent dans les vallons du temps et d’un globe insouciants. » «Voilà désormais ce à quoi je suis contraint. L’irritante nonchalance de mes journées sans pain, le doux cliquetis des ossements de mes enfants, la cacophonie de leur toux mêlée de sang. C’est ça le charme de la tristesse, la beauté de la misère. » « Il y a comme une fêlure en ces âmes. Une empreinte du destin qui strie la masse informe d’un océan de larmes. Un gouffre béant et avide où se trémoussent dans un feulement monocorde des entités à l’agonie dans le brasier d’une chrysalide. » « Je suis le prisonnier de ma conscience. À ma gauche l’animal. À ma droite la raison. Ma substance est le mal-être et ma mission. Je connais l’Amour et la Haine. Je suis Hitler. Je suis Abraham. Je suis Noé. Je suis le roi. Je suis l’esclave. Je suis ce que je m’autorise à être. Je suis supérieur ou primitif, pape ou chair à canon. Je suis l’ange. Je suis le démon. Je suis une poussière mégalomane. Je suis une fantaisie du destin. Je suis la norme. Je suis la mesure. Je suis le mètre. Je suis le missionnaire. Je suis le bourreau. Je suis le Nègre. Je suis le juif. Je suis l’Homme. »</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s5">
+        <div class="section-marker"><span>2h55</span><i></i></div>
+        <div class="section-copy">
+          <p>J’entends rentrer le vieux d’en face. Un vétéran de la guerre de 39-45. Un de ces tirailleurs qui ont donné toute leur vie à la patrie, à la France. Pour presque rien. Non pour rien du tout. Rien. Lui a survécu par miracle mais en garde un cœur défaillant en souvenir des bombes qui ont explosé trop près. Qu’est ce que ça aurait changé au cours de l’Histoire qu’un obus l’ait éventré et étalé ses boyaux fumants dans les tranchées ? Quel sentiment doit-il avoir en voyant ses petits-fils dans les antres de la France enchaînés par les tours de béton et les préjugés ? Mais lui continue de vivre, mu par la routine du quotidien. Et sur cette terre d’Afrique ils sont des milliers à hanter les coulisses d’une Histoire qui veut les oublier. Une Histoire aux mœurs légères qui donne son corps au plus offrant. Une Histoire qui ne se donne à voir que sous le regard du plus fort. Une Histoire qui ignore l’honnête citoyen fauché par une balle perdue. Une Histoire qui oublie l’instituteur qui a éduqué et fait des hommes. Une Histoire qui se fout du cultivateur qui a fait pousser du grain pour nos panses avides. Une Histoire qui érode en silence des pans entiers de la mémoire de mon peuple. Une Histoire qui oublie d’expliquer pourquoi et comment aux enfants avant qu’ils ne sombrent dans l’idiotie. C’est cette même Histoire qui laisse se faner la foi en l’Homme, dans l’hiver de la finance et avec les extrémistes de pensée et d’action. Il y a des nuits comme celle-ci où j’aurais voulu n’avoir jamais été possible.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s6">
+        <div class="section-marker"><span>3h17</span><i></i></div>
+        <div class="section-copy">
+          <p>À côté, mon père dort depuis longtemps. Mon père pour moi reste un mystère. Un étrange personnage qui a trop cru en l’Homme. Oubliant que concernant l’Homme, l’accident c’est le Bien. Le Mal est sa nature profonde. Le Mal. Mais mon père a dû l’oublier ou il n’a pas voulu y croire. En fait je ne sais pas grand-chose de mon père. On n’a plus conversé depuis que j’ai eu 10 ans. L’âge fatidique où je suis parti. Parti apprendre à mes dépens que le monde et la vie étaient d’une cruauté banale. Aussi loin que je me souvienne, je n’ai jamais aimé l’école. Dans son principe. Cette boîte à formater les individus m’a toujours déplu. Cette uniformité de regard et de démarche dans laquelle on veut couler tout le monde m’a toujours déçu. Mais malheureusement je m’en sortais plutôt bien. J’ai passé un concours d’entrée au Prytanée Militaire et malheureusement j’étais parmi les admis. C’était excitant pour le gamin bouillonnant que j’étais. J’allais poursuivre mes jeux de guerre à une autre échelle. Je ne pouvais pas savoir que ma vie basculait à jamais. Je me suis retrouvé pris en otage par le passé et le présent de mon pays. Nous étions les souffre-douleur d’un pays et de tout un continent mal en point. Des deuxième classe illettrés pour encadrer l’élite d’un pays. Quelle folie. Et le pire c’est qu’il n’est pas aisé de trouver un coupable. Tant les responsables de cette situation sont nombreux. Moi j’en suis sorti démoli. Une loque humaine. Exclu pour mauvais résultats. Quelle chance. Enfin j’en sortais. Mais d’autres y ont laissé l’essentiel de ce qu’ils avaient de bien en eux, sacrifiés sur l’autel du désarroi de tout un peuple. J’ai appris là-bas ce que signifiait appartenir à un peuple, en l’occurrence au peuple noir d’Afrique. C’est avant tout endosser une histoire qui vous plombe les ailes sur la ligne de départ. De ces cinq années militaires, je n’ai plus beaucoup de souvenirs. La censure a frappé. Tir, combat, armement, corvées, bagarres, punitions… Jusqu’au jour où un documentaire sur la guerre du Biafra m’a fait réfléchir à la finalité des choses. Dans une guerre ce ne sont pas les soldats qui souffrent le plus. Le problème est ailleurs. J’en ai retenu que tout est tout au sens où on peut se foutre de la merde ambiante à condition de ne pas gueuler quand on vous attaque à la machette pour avoir de quoi manger. Il m’a fallu trois ans pour me remettre debout. Pour y arriver rien ne m’a aidé mieux que le RAP. Rien. Ni ma famille, ni mes nouveaux amis. Rien. Si. Peut-être les livres, l’écriture. Mais cela aussi c’est le RAP qui l’a nourri. Après cinq ans loin d’eux, mes parents étaient devenus des étrangers. Je me suis réfugié dans la lecture et la musique. Chez moi il y avait une bibliothèque colossale. Et j’ai lu. De l’astronomie à l’histoire de l’Afrique. Cheikh Anta Diop, puis Leclézio, Saint-Exupéry, Mermoz, Amadou Hampaté Ba, Blaise Pascal etc. J’étais hors du temps occupé à recharger mes batteries, à m’enivrer de vie. Et progressivement le monde me devenait de plus en plus hostile. Je commençais à marquer ces phrases qui régissent encore aujourd’hui ma vie. Avant tout et après tout, tu es seul. L’Histoire est une pute qui donne son corps au plus offrant. Et mes premiers textes jaillissaient de mes entrailles avec une noirceur inquiétante. Mes termes préférés étaient solitude, mélancolie, mort, ombre, ténèbres, douleur… Avec cette idée attirante du suicide. Cultivée par des lectures comme L’abîme. Mais cette idée, on me l’a volé un mardi de décembre 1995. David est venu m’apprendre que Eric s’est suicidé le Vendredi 9 Décembre. Pourtant le Mercredi Eric était passé me voir. J’étais avec ma copine et il ne m’a pas dit grand-chose. Il m’a laissé un mot dont je n’ai pas su comprendre la portée. Le Lundi, nous étions ensemble au lieu d’être en cours et moi je lui disais que j’allais probablement mourir avant lui. Une impression. Il m’a ri au nez et m’a raconté que la veille il avait pris des cachets dans la main, prêt à se suicider. Je n’ai pas osé le croire et je l’ai vite oublié. Alors en cette chaude après-midi du mardi 13 Décembre 1995 je n’ai pas réagi tellement c’était trop. Le lendemain matin je l’ai dit à ma mère. Elle pleurait sur le pas de ma porte pendant que je m’éloignais sur le chemin de l’école. Je ne pensais rien. Je marchais. J’allais à l’école. Les jours qui ont suivi furent très importants dans ma vie. J’ai compris que tout calcul fait, on est bien seul avec soi même. Je me souviens avoir pleuré le soir. Plus de rage encore que de douleur. Je n’avais plus jamais pleuré depuis l’école militaire, je ne savais plus ce que c’était. Eric était mort et moi j’étais obligé de vivre. Contraint de vivre, d’exister, pour ne pas donner raison à tout ce qui nous a fait défaut. Désormais je devais vivre pour deux. Je devais vivre et laisser des traces de notre passage en ce drôle de monde. J’étais piégé. Mais plus jamais rien ne me fera peur. Plus jamais. J’étais mort.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s7">
+        <div class="section-marker"><span>4h05</span><i></i></div>
+        <div class="section-copy">
+          <p>Eric et moi avions en commun la famille quasi absente, les mauvais résultats scolaires, le mal-être et le « rap ». Suffisamment pour être plus copains que d’autres. On avait surtout le rap. Les toutes premières productions d’IAM, NTM, ASSASSIN, SOLAAR, DEMOCRATES D, SAÏ SAÏ, PUBLIC ENEMY, ARRESTED DEVELOPMENT, NAUGHTY BY NATURE… On se disait que ces gens, en faisant leurs musiques quelque part en France ou aux USA, ne pouvaient pas s’imaginer les parcelles de bonheur qu’ils semaient dans nos vies vides et douloureuses. Et nous avions pondu un paquet de rimes jouissant à plein feu de ce moyen de dire. Nous disions que lorsque les graines du rap sont tombées sur cette ville, personne n’y croyait. Aujourd’hui elles ont germé et ont généré des fois de baobab contre le temps. Tout cela dans l’incompréhension générale. Que pouvait-on bien éprouver à réciter des textes sur des rythmiques saccadées à longueur de journée ? On ne pouvait l’expliquer. Mais c’était une thérapie, une saignée ou une trépanation pour survivre dans ce pays amorphe, sur cette terre d’Afrique où les déchirures héritées de l’Histoire se dupliquent dans un terreau fertile. C’était le RAP ou la folie pour nous qui refusions de ressembler à cette horde de jeunes qui avaient de bonnes notes mais une curiosité microscopique et une culture tout aussi lacunaire. Eux, ils n’avaient même plus cette faculté-là qui est de rêver d’autre chose.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s8">
+        <div class="section-marker"><span>4h15</span><i></i></div>
+        <div class="section-copy">
+          <p>À 17 ans, je n’étais même pas sûr de tenir assez longtemps pour passer le Bac. C’était effrayant de voir ces jeunes de mon âge incapables d’ébaucher une réponse valable quand je leur demandais : Pourquoi l’Afrique est dans cette merde ? Ils pouvaient pourtant me parler une heure de l’armistice de Pétain ou de la ligne Maginot, ou même me commenter un texte de Rousseau. Et ce n’est pas leur faute, même si je ne trouve pas de bouc émissaire. Quel gâchis ! Eric et moi, nous nous foutions éperdument de ces salades, occupés que nous étions à essayer de comprendre par quel enchaînement de ruptures notre peuple, notre pays en était là. Il nous fallait comprendre comment la bible et le canon ont brisé l’Africain et lui ont, avec le temps, ôté toute foi et toute confiance en lui. Il nous fallait comprendre pourquoi et comment. Pour ce faire, ni nos parents, ni l’école n’étaient des alliés. Nous étions seuls. Un peu trop seuls et nous avons surestimé le capital d’espoir que nous possédions. Mais il fallait le faire sinon nos âmes n’auraient jamais connu la paix. Nous étions la preuve vivante qu’on ne vient pas de nulle part. On transporte toute une histoire, toute une enfance qui peut être un boulet ou une paire d’ailes.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s9">
+        <div class="section-marker"><span>4h35</span><i></i></div>
+        <div class="section-copy">
+          <p>Encore une cigarette que mes lèvres retiennent nonchalamment. J’arrêterai de fumer demain. Mon père n’a jamais pensé à mettre une télé chez nous. Je n’ai jamais su pourquoi. Encore une étrangeté du personnage. Il n’est pas un de ces fauves inconséquents apprivoisés par l’occident et posés comme un bouquet de chrysanthèmes sur le marbre froid de la conscience de mon peuple. Non. Lui c’est l’homme qui croit en l’Homme. Du genre à se priver pour que l’autre en ait. Le contraire de ce que nous enseigne l’occident en version originale. J’estime beaucoup mon père en tant qu’homme. Ce sont les mêmes qui l’ont poussé où il en est qui m’ont volé ma joie. Ils m’ont pris mon sourire et ma paix. Ils m’ont enfermé en moi. Mon père m’a amené à l’église prier la vierge Marie. Il m’a inscrit à l’école coranique et j’ai récité les versets du Coran. Mais il ne m’a jamais rien dit. Rien de spécial. Mais en le regardant essayer, chaque jour que Dieu fait, de ne voir que ce qu’il y avait de bien en tous ceux qu’il côtoyait, il m’a tout appris. Il a fait de moi un soldat surentraîné à la quête de l’Homme. J’ai grandi dans cette ambiance de faire le Bien à tout prix. Je n’ai rien connu d’autre. Voilà pourquoi je n’arrive pas à faire autrement que respecter ce personnage qu’est mon père et me dire qu’il ne mérite pas ce qu’il vit. Mais j’ai aussi retenu que le but du jeu, ce n’est pas de faire le Bien, ni même le Mal. Je ne sais toujours pas quel est le but du jeu. Je le saurai peut-être demain.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s10">
+        <div class="section-marker"><span>4h50</span><i></i></div>
+        <div class="section-copy">
+          <p>Avec insistance le sommeil me fait des avances. L’air frais de l’aube renforce son charme. Le vacarme de mon esprit m’a encore coûté une nuit. J’appréhende toujours l’instant de l’abandon. Le moment où tout bascule dans le noir. Je déteste l’idée de mourir un peu. J’aurais préféré une bonne fois pour toutes. Je m’endors comme on fait une pause, comme on fait « pause » sur le magnétoscope. Ça ne change rien à l’histoire. L’Histoire elle se poursuit, parsemée de nimbes et de mânes errants. Avec ses litanies de griots aphones d’avoir hurlé tout ce qu’ils avaient à offrir. Avec ses mélopées inaudibles pour nos cochlées usées par le vacarme du monde. Avec les furtifs éveils de la bête immonde qui sommeille en chacun de nous. La vie se poursuit laissant ma masse charnelle expérimenter son étiquette d’esclave. Dehors la vie pulse aux rythmes des éclats de rires, des gémissements, des râles et des silences délayés dans la fraîcheur d’une aube annoncée. C’est la Nuit. Vide comme la vie. Ici comme ailleurs. C’est la nuit. Avec ses veilleurs impromptus, sa bonhomie aux relents d’alcool, ses corps moites, ses souffles haletants, ses étreintes furtives et ses regards vitreux noyés dans la pénombre. C’est l’errance. L’envie de jouir avant la fin. Avant l’aube ou la mort.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s11">
+        <div class="section-marker"><span>10h01</span><i></i></div>
+        <div class="section-copy">
+          <p>Le jour est là. Bruyant et brûlant. Je l’entends avec son halètement de fauve. Maître des espaces et seigneur des horizons, il viole mes paupières et s’épand en moi en un réveil douloureux. L’éveil des éléments pousse à l’éveil des sens. Ma pensée du moment : « Ce sont les hommes qui font les peuples. Ce sont les peuples qui font l’Histoire. »</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s12">
+        <div class="section-marker"><span>10h22</span><i></i></div>
+        <div class="section-copy">
+          <p>Je scrute mon reflet dans la glace. Ce regard figé dans le vague qui s’efforce de ne rien vouloir dire. Il y a des barreaux même sur les fenêtres de mon âme. Ce rictus amer au coin des lèvres. Ces zygomatiques nécrosés par une douleur sans nom. Je sors. Je vais voir comment font ceux qui vivent.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s13">
+        <div class="section-marker"><span>10h43</span><i></i></div>
+        <div class="section-copy">
+          <p>Le ciel a des allures de toile de maître. Un dôme pour cette chapelle du peuple noir. Un bleu métallique étalé à perte de vue, des touffes de gris jetées en trompe-l’œil et cette lumière écrasante qui ébarbe les scories de la ville, cette autre toile, celle des hommes. Autant la nuit est timide et mystérieuse, autant le jour est envahissant. Il pleut une lumière brutale qui inonde la rétine et interpelle jusqu’à l’âme. Mon regard cherche quelque chose derrière ces individus. Une raison, un sens, quelque chose. Mais mes pupilles avides n’ont que le défilé d’une vieille ville naissante, un morceau d’Afrique. Une masse colorée mue par un impérieux besoin : vivre. Un amalgame confus et pudique de pauvreté criarde, de modernité, d’archaïsme, de chaos et d’espoir téméraire. Ce n’est pas que la pollution, il y a quelque chose dans l’air. Un trouble. Quelque chose. Des âmes qui errent en attendant l’heure de la paix. Des âmes délogées trop violemment de leurs enveloppes martyrisées. Une inquiétude trop vite traduite en insouciance. Un traumatisme trop vite enfoui dans la cohue. Il y a quelque chose. Un vide. Peut-être ce fil d’Ariane rompu par la pression. Après les gaulois ce sont Karl Marx, Lénine et Engels qui ont hanté nos vies. Au gré des saisons, mon peuple cherche une baie paisible pour jeter l’ancre. Mais dans les ombres hostiles de l’amnésie, il n’y a aucun phare à l’horizon. On navigue à vue. Climat propice aux dérives des hommes et des idéaux. Et il y a aujourd’hui encore un fauve qui mâchouille ardemment la carotide de ce géant tétanisé qu’est l’Afrique, c’est l’Économie. Celle-là qui asphyxie tout mouvement de pensée sincère qui ne s’insère pas dans sa logique. Celle-là qui ouvre des portes à des idéaux mineurs et donne des ailes à ceux qui la tiennent. Alors entre la prétendue infériorité des noirs, les fauves indigènes aux crocs acérés dressés pour piller au mieux mon peuple et sa terre, le travail d’éducation colossal qui consistera à convertir les énergies des esprits dans une langue qui ait droit de cité et l’impérieuse nécessité de réhabiliter l’estime de soi chez chaque Africain, il y a de quoi comprendre que pour nous, après avoir fait le point de notre situation, la première décision est de savoir si on va se suicider ou combattre. L’Histoire nous tient.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s14">
+        <div class="section-marker"><span>11h11</span><i></i></div>
+        <div class="section-copy">
+          <p>Je m’engage sur un pont, L’ancien pont comme on dit ici. Authentique ouvrage de la colonisation. Il fallait acheminer huile de palme et coton jusqu’au port. D’où cet étroit morceau de bitume tailladé par les rails. En dessous, un fleuve aux eaux sombres charrie tour à tour rancœur et haine, sueur, larmes et sang, vers l’immensité de l’océan. L’impénétrable opacité de ces eaux se diluait dans le bleu de la mer. Un brassage silencieux qui a lieu dans un lagon aux reflets polychromes. Une poche d’air. Un grain de beauté sur un visage larvé par le souffle du temps. Et toutes ces lignes d’asphalte qui quadrillent la ville comme un corset, ces lignes de vie usées qui n’offriraient rien à la chiromancie. Voilà ma ville en cette nouvelle journée avec ses mendiants assortis à son dénuement et ses voitures luxueuses qui rappellent que tout le monde n’est pas du même monde. En face de moi se détache, sur un ciel taillé dans le saphir, une croix. Une croix sombre et austère brandie vers des cieux incertains. Une croix dont l’érection s’efforce de tromper l’agonisante lumière des âmes. Tout un symbole. Un transfert des obsessions et des espérances dans un autre langage, celui de l’Église. Il faut voir toutes ces gens s’efforcer de croire qu’ils croient en Jésus. Jésus n’est pas dans notre histoire. Il n’est pour rien dans tout ce cinéma. Il n’y a que l’Homme face à l’Homme. Quand la foi se greffe sur l’ignorance, elle peut étourdir les fils de Dieu. Et pourtant ils s’appliquent à implorer le Seigneur, recroquevillés sur leurs peurs. Tout le problème de mon peuple est là. Nous sommes allés et nous allons de ruptures en ruptures. On a plus de fil d’Ariane pour nos esprits dans le labyrinthe de l’Histoire. L’Église s’est aussi bien exportée que l’École. Et chez moi, chacun de ces monuments a profondément désorganisé l’inconscient collectif. Nul besoin d’esprit pour voir et rire ou pleurer de ce mimétisme de forçat. Le portrait robot de l’occident ronge le corps et l’âme de mon peuple. Un dualisme permanent. Une schizophrénie tenace dans notre perception de nous-mêmes. On veut avancer. On veut faire comme ceux qui ont le bénéfice de l’Histoire et qui courent. On copie à en perdre l’imagination. Mais comment faire autrement qu’imiter celui qui vous avilit au nom de Dieu. Il faut être quelqu’un pour échapper à ce tissu de tenants qui aboutit à cette léthargie de la conscience, à ce coma de la pensée, à cette haine de nous-mêmes. Car chaque Africain qui a eu l’occasion et les moyens de penser à sa situation est un désaxé potentiel, un complexé, un refoulé au sens psychiatrique. Il y en a peut-être qui en profitent. Mais mon avis sur la question c’est que l’Homme n’en sort pas grandi. Même si ça ne veut rien dire. Et toute cette jeunesse à qui on a offert que le mépris, tous ces jeunes comme moi à qui on a volé même le rêve, il faudra leur offrir une Histoire toute neuve le moment venu sinon il y aura encore du sang, encore des larmes et encore des fils rancuniers.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s15">
+        <div class="section-marker"><span>12h07</span><i></i></div>
+        <div class="section-copy">
+          <p>J’ai appris à mes dépens le monde qu’il y a entre la France et les Français. Parce qu’un jour j’ai mis les pieds en France. J’ai foulé le sol de Victor Hugo et de Bob Denard. J’ai découvert le froid et j’ai appris à être seul dans la foule. J’ai appris à me souvenir que j’étais noir et que ce n’est pas rien. J’ai appris que l’ignorance et les préjugés généraient des lieux communs coriaces. Je me suis fait raconter par un honnête citoyen français son expérience africaine. Il s’est retrouvé à travailler avec des autochtones. Comme souvent chez moi, il était dans la position du patron et donc donnait des ordres. Il était jeune et commandait des gens bien plus âgés que lui. D’où des rapports difficiles qui lui sont restés en travers de la gorge. Il avait du mal à comprendre quelle importance pouvait avoir l’âge quand il était question de travail. Voilà le dualisme stigmatisé. J’ai donc essayé de tuer cette incompréhension autophage en lui expliquant que pendant longtemps en Afrique le seul diplôme probant était l’âge. Pour savoir, il fallait avoir vu. Et pour avoir vu il fallait avoir vécu. D’où l’âge. On respecte plus âgé que soit parce qu’il est censé savoir plus que nous. Bien sûr cet état de chose est en voie de disparition. Mais le dualisme étant ce qu’il est on rencontre aussi bien des anciens qui pensent comme avant que les jeunes ont l’esprit moulé par l’école. C’est le traditionnel qui côtoie le moderne. Dans la ville comme dans les esprits. C’est ce dualisme qui fait de nous des écartelés. J’ai appris à St Gaudens que les Africains sont paresseux, car je l’ignorais. Il a fallu le hasard des rencontres pour que je me retrouve dans une famille dont certains membres ont, à une époque, évangélisé l’Afrique. Il s’agissait du Gabon. Le fait qui ouvrit la porte à cette idée admise par plus d’un était le suivant : cette femme me racontait qu’elle a vu des gens au Gabon couper un arbre pour en récupérer les fruits au lieu d’y grimper. Le fait en lui-même peut être déconcertant pour un esprit qui n’a pas prévu une interface entre les faits de ce monde africain et la logique de l’occident. Le Gabon c’est un vaste pays de la ceinture équatoriale recouvert par une forêt dense et inhospitalière. L’étranger dans ce décor, c’est l’Homme. Pour s’installer l’homme doit lutter contre la forêt. C’est donc cette logique séculaire qui s’est inscrite dans les habitudes et génère des agissements aussi étranges pour l’étranger. Sur cette terre, on a pris l’habitude de lutter contre la forêt. Un ou deux arbres de moins c’est un ou deux mètres de plus pour l’homme. Mais encore, fallait-il l’expliquer à cette dame. Et tout calcul fait, il me semble moins pénible de cueillir des fruits sur un arbre que de l’abattre. L’essentiel de ce que j’en ai retenu c’est que l’homme blanc en position de force n’a jamais voulu comprendre l’Africain et sa perception du monde. D’où un magma corrosif de préjugés séculaires qui empêchent les uns et les autres de voir l’Homme sous l’épiderme. On a expliqué à des enfants innocents que la race est un gène. Que le Noir est forcément un être inférieur. L’imprégnation psychologique aidant on a généré des lieux communs solidement ancrés dans les esprits. Heureusement qu’il y en a qui s’efforcent de ne voir que l’Homme dans ses errements, avec sa quête effrénée du conflit pour savoir ou définir qui est qui. Et puis la roue tourne…</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s16">
+        <div class="section-marker"><span>13h37</span><i></i></div>
+        <div class="section-copy">
+          <p>J’ai du mal à ne voir dans cette foule qui circule autour de moi que des nègres à l’esprit lourd et sans ambition. Non. Ce serait trop simple. Vraiment trop réducteur si on s’autorise une seconde d’attention. Il y a autre chose. Il y a l’être humain dans une de ses déclinaisons, l’Homme dans ses contradictions. Il y a ces mômes dont le regard n’a plus grand-chose d’enfantin. Il y a ces parvenus agrippés au volant de leurs voitures comme à l’ultime preuve de leur appartenance à un monde qu’ils ne comprennent même pas. Il y a ces honnêtes gens qui déambulent avec dans leurs colis tout ce qu’ils sont au monde. Il y a ces vieillards abandonnés à eux-mêmes qui tendent des mains décharnées. Il y a ces élèves en uniforme qui circulent sur des taxis-motos. Il y a des hommes qui n’aspirent qu’à vivre. Et alors. Où est le problème ? Il est ailleurs, partout et nulle part. Mon peuple ne manque ni d’esprit, ni de foi pour vivre heureux. Tout comme sur terre on ne meurt pas de faim parce qu’il n’y a pas à manger et on ne meurt pas de soif parce qu’il n’y a pas à boire. Le problème est ailleurs. Nous faisons juste la cruelle expérience de l’oiseau à qui on a plumé les ailes et qu’on lance dans le vide. S’il y survit, il ne pourra qu’attendre que des ailes lui repoussent.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s17">
+        <div class="section-marker"><span>14h01</span><i></i></div>
+        <div class="section-copy">
+          <p>Je vais flâner du côté du grand marché. On y trouve de tout. Du riz importé comme des cercueils. Des pneus comme des cassettes piratées. De tout. Et à cette heure où le soleil darde chaque centimètre carré offert, chaque millimètre carré d’ombre est une aubaine. Alors une forêt de parasols discute l’exclusivité de la bienfaisance à d’immenses rangées de toitures en tôle. Un véritable enfer ces tôles. Elles entretiennent la chaleur avec une assiduité remarquable. Quant à savoir pourquoi il n’y a pas grand monde qui fuit ces plaques chauffantes, il faut aller chercher dans le coût et dans les habitudes. Comme un creuset, le marché draine tous les aspects d’un peuple. L’occasion de constater le niveau de développement, le niveau d’éducation, l’ardeur des instincts.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s18">
+        <div class="section-marker"><span>14h27</span><i></i></div>
+        <div class="section-copy">
+          <p>Le monde court vers des dollars et ce, depuis longtemps. Les uns tuent pour la patrie en y trouvant de quoi se réaliser et les autres se bouchent le nez et les oreilles pour compter les dollars. Je sais que les cris du cœur n’ont pas d’écho dans le caisson étanche de l’économie mais le présent ne fait que passer et l’avenir se meurt en bien des points du globe dans les plaies infectées du passé. C’est le cas au Bénin comme dans toute l’Afrique noire. De quoi se dire en tant qu’Homme il y a un problème quelque part.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s19">
+        <div class="section-marker"><span>14h40</span><i></i></div>
+        <div class="section-copy">
+          <p>L’avenir de mon pays et de toute l’Afrique ce sont ces jeunes comme moi qui ont vu faire leurs parents dans l’incertitude et dans le manque de cohérence inhérent aux peuples qui ont manqué de ciment pour construire leur histoire. Ce ciment-là qu’est la mémoire, la mémoire vive, la mémoire constitutive. Sans elle on a du mal à imaginer l’avenir, à prolonger par la pensée le présent. Elle a manqué à nos pères et risque de nous faire défaut à nous aussi. Ce ferment indispensable à l’éclosion des êtres. L’ennemi de l’avenir a chez moi beaucoup de soldats dans ses rangs. Depuis les 80% d’illettrés jusqu’à une jeunesse à qui on n’a pas donné des armes pour tuer le passé. Avoir un bouquet épineux de dirigeants qui ont fait l’ENA ou la Sorbonne n’est vraiment pas l’ébauche d’une solution. Non, même pas en rêve. Il viendra un jour où toute cette jeunesse en voudra à ces vieux anesthésiés par le temps et leur rigidité maladive. De toute façon si rien ne change il y aura un séisme social et dans les esprits parce qu’on aura résolument changé d’époque. Et une jeunesse qui a faim d’avenir et de dignité se fera entendre. Ceux à qui on a menti ou cru mentir grandiront et au moment de tuer le père ils n’iront pas de main morte.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s20">
+        <div class="section-marker"><span>14h59</span><i></i></div>
+        <div class="section-copy">
+          <p>Pour ceux qui se demandent jusqu’à quand le passé sera une excuse pour les africains, la réponse est simple : tant que ce sera vrai. Tant que ceux qui ont le bénéfice de l’Histoire ne comprendront pas que de toute façon nos destins sont liés et qu’ils ont autant intérêt que nous à sortir du passé.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s21">
+        <div class="section-marker"><span>15h09</span><i></i></div>
+        <div class="section-copy">
+          <p>Je me dis qu’un jour il faudra que je sorte un disque. Un disque-passerelle entre l’Afrique et le monde, entre le Rap et la vraie vie. Un disque où l’Homme parle à l’Homme. Un disque que des gens écouteront et y trouveront de quoi tenir bon comme j’ai tenu bon en écoutant Arizona Dream ou d’autres disques. Je le ferai. C’est sûr. J’ai une conviction téméraire vu la profonde asthénie dans laquelle patauge l’hémisphère culturel de mon pays. Mais rien que pour Eric je le ferai. Au moins avant de crever. Sinon ce serait grave.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s22">
+        <div class="section-marker"><span>15h48</span><i></i></div>
+        <div class="section-copy">
+          <p>Je vais faire un tour chez Rock. Un de ceux, avec Oscar par qui la musique existe dans cette ville et dans ce pays. Je ne sais pas s’il s’en est rendu compte, mais toutes les heures que j’ai passé dans son petit studio - en fait sa chambre -, avec Eric m’ont énormément appris et ont exaspéré mon rêve de faire de la musique. Il m’a appris qu’après tout l’essentiel en musique, c’est encore celui qui la fait et non les machines. Et il pouvait le dire parce qu’il n’y avait qu’un quatre pistes dans le studio avec peu de choses autour. Mais beaucoup d’énergie et de travail pour pallier au manque de moyens. Il m’a appris que le but ultime dans la musique quelle qu’elle soit c’est de créer des sons et de les faire parler. Que dire de plus. Il n’y a plus d’artistes dans ce pays qui ait la tranquillité de créer. L’alimentaire prime. Et pourtant je suis persuadé qu’il suffit de peu de choses pour que la machine démarre. C’est le problème de toute la dimension culturelle au Bénin. Quelque chose s’est arrêté. Ce sont là les conséquences d’un drôle de marxisme qui a semé le coma dans la pensée de la jeunesse. Il n’était pas facile de l’ouvrir par ce temps. On a fait beaucoup de mal à la culture dans ce pays et, par effet domino, à sa jeunesse, à l’avenir.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s23">
+        <div class="section-marker"><span>16h29</span><i></i></div>
+        <div class="section-copy">
+          <p>J’ai longtemps cru que le plus grand problème de l’Homme était la mort. Mais non. L’ultime problème de l’Homme c’est encore la vie. Le simple fait de vivre est déjà si pénible. Je me suis senti interpellé un jour, à Lourdes, par la difficulté d’être. C’était un jour de pèlerinage. Avec mon père, nous étions en face de la cathédrale et le ciel s’est mis à faire des siennes. Il s’est brusquement mis à pleuvoir des cordes. Devant moi, devant l’église il y avait un parterre de personnes handicapées. Toutes figées sous les grosses gouttes, incapables de se tirer de là. Ce fut ma première grande douleur face à l’impuissance de l’Homme. Je me demandais ce qu’ils avaient bien pu faire pour mériter cela. Cloué à un fauteuil roulant qu’on ne peut manipuler, avec pour seul recours la foi des autres. L’estomac noué je n’ai pu que regarder ces gens attendre d’être secourus. J’aurais voulu les aider, faire quelque chose. Mais je ne pouvais rien. J’avais six ans. Je ne l’oublierai jamais. Je commençais à deviner la douleur qu’exigeait le fait d’être. Et les ans n’ont fait que confirmer cette impression. Vivre, c’est parfois, et même souvent pénible. Le regard de l’aveugle m’a aussi marqué. Ce vide...</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s24">
+        <div class="section-marker"><span>17h33</span><i></i></div>
+        <div class="section-copy">
+          <p>Le soleil décline et je réalise le temps qui fuit. Le temps. J’ai toujours eu du mal avec le temps. J’ai perdu la faculté de percevoir avec certitude le temps. Je ne suis plus jamais sûr du nombre de jours, de mois ou d’années qui s’écoule entre deux événements. Je ne me réfère plus à l’instant. Cet instant que je jubile à capturer dans l’écriture. Écrire c’est de toute façon écrire contre l’oubli. C’est un pied de nez au néant passé et à venir. C’est asservir un moment d’éternité.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s25">
+        <div class="section-marker"><span>18h18</span><i></i></div>
+        <div class="section-copy">
+          <p>Je me prends à imaginer que le pétrole jaillisse à flots dans ce pays. Des esprits myopes verront s’envoler nos ennuis avec les kilomètres de pipelines, les gratte-ciel et les pétrodollars. Mais non pas du tout. On n’achète pas la mémoire. On n’achète pas la paix… de l’esprit. Il est question de l’Homme. À tous ces maux qui minent mon peuple jamais l’argent ne sera le remède.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s26">
+        <div class="section-marker"><span>20h00</span><i></i></div>
+        <div class="section-copy">
+          <p>L’heure où tout le monde s’installe pour le shoot d’infos quotidien. Pour certains c’est un Juda pour épier le monde. Pour d’autres une fenêtre sur un ailleurs, une échappatoire. Peu importe la raison, mais pour quelques minutes ou quelques heures on s’offre corps et âme à cet objet dont l’humanité se défera difficilement. Selon le regard qu’on y porte c’est un piège à cons ou un instrument formidable. Mais en attendant point d’émissions pour expliquer pourquoi et comment. On a surtout droit à des feuilletons périmés.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s27">
+        <div class="section-marker"><span>21h22</span><i></i></div>
+        <div class="section-copy">
+          <p>La nuit est de nouveau là et il me faut l’affronter. Guy vient d’arriver. On va pouvoir discuter pour amorcer la descente vers les profondeurs de la nuit. Comme chaque nuit je vais me retrouver seul avec moi-même à penser. Et demain encore, un peu partout on va réitérer la même lutte du nouveau contre l’ancien, la même lutte des classes, la même lutte des races. Parce qu’en vérité on n’est jamais sorti du passé. Il n’y a eu que des glissements sémantiques pour rester dans l’air du temps.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s28">
+        <div class="section-marker"><span>22h55</span><i></i></div>
+        <div class="section-copy">
+          <p>Il paraît qu’une certitude c’est une constatation qu’on médite et qu’on s’approprie. À ce titre je suis certain qu’un autre monde est possible. Un monde un peu moins aberrant où on réhabiliterait l’Homme. L’Homme tout simplement. L’Homme avant tout et l’Homme après tout. Mais avant il faudra permettre à tous de savoir. Pour penser, pour être. Après, cette idée s’imposera d’elle même. Ma conception de Dieu n’a jamais cessé de fluctuer. Mais jamais je n’ai cru à un barbu bienveillant qui punit ou récompense. À l’heure qu’il est, Dieu pour moi c’est ce qui fait qu’il y a tout un arbre dans une graine.</p>
+        </div>
+      </article>
+
+      <article class="reader-section" id="s29">
+        <div class="section-marker"><span>0h00</span><i></i></div>
+        <div class="section-copy">
+          <p>Vingt-quatre heures plus tard je suis toujours jeune, toujours Noir et toujours Africain. Le même étau létal me tient. Encore une nuit à tirer avant que la mort dans un ultime baiser ne me délivre. En attendant, je poursuis mon chemin au plus profond de mon être. Je poursuis mon ascension sur les falaises abruptes de ma pensée, solidement arrimé au Néant par le baudrier de ma conscience. À bientôt Eric. Toulouse, Février 2001</p>
+        </div>
+      </article>
+
+      <!-- ========== CONTRÔLES DE LECTURE ========== -->
+      <div class="controls">
+        <button class="ctrl" id="prev" onclick="move(-1)">← Précédente</button>
+        <button class="ctrl" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Couverture</button>
+        <button class="ctrl" id="next" onclick="move(1)">Suivante →</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div><strong>24 HEURES</strong> · Ishaq L’Artiste</div>
+    <div>Archive numérique · Février 2001</div>
+  </footer>
+
+  <!-- ========== SCRIPT DE LECTURE ========== -->
+  <script>
+    let current = 0;
+    const n = 30;
+
+    function showSection(i, scroll = true) {
+      if (i < 0 || i >= n) return;
+      current = i;
+      document.querySelectorAll('.reader-section').forEach((e, j) => e.classList.toggle('active', j === i));
+      document.getElementById('prev').disabled = i === 0;
+      document.getElementById('next').disabled = i === n - 1;
+      if (scroll) document.getElementById('texte').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function move(d) {
+      showSection(current + d);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowLeft') move(-1);
+      if (e.key === 'ArrowRight') move(1);
+    });
+
+    showSection(0, false);
+  </script>
+
+</body>
+</html>
